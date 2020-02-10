@@ -23,4 +23,17 @@ class ProductRepository extends ServiceEntityRepository
 
         return $query[0]['category'];
     }
+
+    public function findCheapest(array $id): ?array
+    {
+        $query = $this->createQueryBuilder('p')
+            ->andWhere('p.id IN (:string)')
+            ->setParameter('string', $id)
+            ->orderBy('p.price')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getArrayResult();
+
+        return $query;
+    }
 }

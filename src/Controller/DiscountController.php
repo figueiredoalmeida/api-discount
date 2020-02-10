@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Customer;
 use App\Entity\Product;
 use App\Service\DiscountCalculator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use DateTime;
 
 class DiscountController extends AbstractController implements TokenAuthenticatedController
 {
@@ -26,6 +28,35 @@ class DiscountController extends AbstractController implements TokenAuthenticate
 
         return $this->json([
             'discount' => $discount,
+        ]);
+    }
+
+        /**
+     * @Route("/api/v1/customer", name="post_customer", methods="POST")
+     */
+    public function postCustomer(
+        Request $request
+    )
+    {
+        $customers = json_decode(
+            $request->getContent(),
+            true
+        );
+
+        $em = $this->getDoctrine()->getManager();
+
+        foreach ($customers as $customer) {
+            $data = new Customer();
+            $data->setName($customer['name']);
+            $data->setSince(DateTime::createFromFormat('Y-m-d', $customer['since']));
+            $data->setRevenue($customer['revenue']);
+
+            $em->persist($data);
+        }
+        $em->flush();
+
+        return $this->json([
+            'info' => 'Customer(s) added with success.',
         ]);
     }
 

@@ -48,11 +48,10 @@ class DiscountCalculator extends AbstractController
             if ($productCategory == self::PROMO_A_CATEGORY && $item['quantity'] == 5) {
                 $order['items'][$key]['quantity'] = $item['quantity'] + self::PROMO_A_ADD_QUANTITY;
                 $order['items'][$key]['total'] = ($order['items'][$key]['unit-price'] * $order['items'][$key]['quantity']);
-                $message = "Discount applied for Promo"
             }
         }
         
-        return $customer;
+        return $order;
     }
 
 }

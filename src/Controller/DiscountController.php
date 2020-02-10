@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DiscountController extends AbstractController
+class DiscountController extends AbstractController implements TokenAuthenticatedController
 {
     /**
      * @Route("/api/discount", name="post_order", methods="POST")
@@ -24,7 +24,6 @@ class DiscountController extends AbstractController
         $discount = $discount->calculate($order);
 
         return $this->json([
-            'message' => 'Welcome to your new controller!',
             'discount' => $discount,
         ]);
     }

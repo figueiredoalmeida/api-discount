@@ -14,7 +14,9 @@
         "symfony/yaml": "5.0.*"
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.14"
+        "symfony/maker-bundle": "^1.14",
+        "phpunit/phpunit": "~7.0",
+        "guzzlehttp/guzzle": "^6.5"
     },
     "config": {
         "preferred-install": {

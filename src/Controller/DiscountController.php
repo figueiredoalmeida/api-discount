@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,6 +19,9 @@ class DiscountController extends AbstractController
             true
         );
 
-        return $order;
+        return $this->json([
+            'message' => 'Welcome to your new controller!',
+            'discount' => null,
+        ]);
     }
 }

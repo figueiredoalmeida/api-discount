@@ -33,6 +33,8 @@ class DiscountCalculator extends AbstractController
     const PROMO_C_AMMOUNT = 1000;
     const PROMO_C_PERC = 10;
 
+    private $totalAmmount = 0;
+
     public function calculate(array $order) : array
     {
         $customer = $this->getDoctrine()
@@ -51,7 +53,35 @@ class DiscountCalculator extends AbstractController
             }
         }
         
+        // PROMO B
+        foreach ($order['items'] as $key => $item) {
+            $productCategory = $this->getDoctrine()
+                ->getRepository(Product::class)
+                ->findCategory($item['product-id']);
+
+            if ($productCategory == self::PROMO_B_CATEGORY && $item['quantity'] >= 2) {
+                # Getting the cheapest product in order to calculate the discount over it's purchase
+                $cheapestIdProduct = $this->cheapestProduct(
+                        array_column($order['items'], 'product-id')
+                    );
+                $index = array_search($cheapestIdProduct, array_column($order['items'], 'product-id'));
+                $cheapestProductPrice = $order['items'][$index]['total'];
+                $order['items'][$key]['total'] = $cheapestProductPrice - ($cheapestProductPrice * (self::PROMO_B_DISCOUNT / 100));
+            }
+            $this->totalAmmount += $order['items'][$key]['total'];
+        }
+        $order['total'] = $this->totalAmmount;
+
         return $order;
+    }
+
+    public function cheapestProduct(array $items)
+    {
+        $id = $cheapestPrice = $this->getDoctrine()
+                    ->getRepository(Product::class)
+                    ->findCheapest($items);
+
+        return $id[0]['id'];
     }
 
 }

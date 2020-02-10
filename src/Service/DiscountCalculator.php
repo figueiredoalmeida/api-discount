@@ -72,6 +72,11 @@ class DiscountCalculator extends AbstractController
         }
         $order['total'] = $this->totalAmmount;
 
+        // PROMO C
+        if ($customer[0]['revenue'] > self::PROMO_C_AMMOUNT) {
+            $order['total'] = $order['total'] - ($order['total'] * (self::PROMO_C_PERC / 100));
+        }
+
         return $order;
     }
 

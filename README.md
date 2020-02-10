@@ -15,12 +15,11 @@ $ composer install
 
 # Database must be running
 
-**Change DATABASE_URL in .env, if needed**
+**IMPORTANT: Change DATABASE_URL in .env**
 
 ```sh
 $ php bin/console doctrine:database:create --if-not-exists
 $ php bin/console make:migration
-$ php bin/console doctrine:migrations:migrate
 ```
 
 How to use
@@ -33,10 +32,10 @@ Run the command bellow in order to test the API.
 $ php -S localhost:8000 -t public/
 ```
 
-I suggest to load some data for customers and products, where you can take from here:
+I suggest to load some data for customers and products, where you can take from here:\
 
-Customers - https://github.com/teamleadercrm/coding-test/blob/master/data/customers.json
-Products - https://github.com/teamleadercrm/coding-test/blob/master/data/products.json
+Customers - https://github.com/teamleadercrm/coding-test/blob/master/data/customers.json\
+Products - https://github.com/teamleadercrm/coding-test/blob/master/data/products.json\
 Orders - https://github.com/teamleadercrm/coding-test/tree/master/example-orders
 
 ### Customers

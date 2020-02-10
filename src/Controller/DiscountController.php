@@ -13,7 +13,7 @@ use DateTime;
 class DiscountController extends AbstractController implements TokenAuthenticatedController
 {
     /**
-     * @Route("/api/discount", name="post_order", methods="POST")
+     * @Route("/api/v1/discount", name="post_order", methods="POST")
      */
     public function post(
         Request $request, DiscountCalculator $discount

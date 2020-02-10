@@ -39,7 +39,19 @@ class DiscountCalculator extends AbstractController
             ->getRepository(Customer::class)
             ->findById(intval($order['customer-id']));
 
+        // PROMO A
+        foreach ($order['items'] as $key => $item) {
+            $productCategory = $this->getDoctrine()
+                ->getRepository(Product::class)
+                ->findCategory($item['product-id']);
 
+            if ($productCategory == self::PROMO_A_CATEGORY && $item['quantity'] == 5) {
+                $order['items'][$key]['quantity'] = $item['quantity'] + self::PROMO_A_ADD_QUANTITY;
+                $order['items'][$key]['total'] = ($order['items'][$key]['unit-price'] * $order['items'][$key]['quantity']);
+                $message = "Discount applied for Promo"
+            }
+        }
+        
         return $customer;
     }
 

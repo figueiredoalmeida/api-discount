@@ -50,6 +50,7 @@ class DiscountCalculator extends AbstractController
             if ($productCategory == self::PROMO_A_CATEGORY && $item['quantity'] == 5) {
                 $order['items'][$key]['quantity'] = $item['quantity'] + self::PROMO_A_ADD_QUANTITY;
                 $order['items'][$key]['total'] = ($order['items'][$key]['unit-price'] * $order['items'][$key]['quantity']);
+                $order['items'][$key]['message'] = "Applied promo buy 5 get 6 for switches products. ";
             }
         }
         
@@ -67,6 +68,7 @@ class DiscountCalculator extends AbstractController
                 $index = array_search($cheapestIdProduct, array_column($order['items'], 'product-id'));
                 $cheapestProductPrice = $order['items'][$index]['total'];
                 $order['items'][$key]['total'] = $cheapestProductPrice - ($cheapestProductPrice * (self::PROMO_B_DISCOUNT / 100));
+                $order['items'][$key]['message'] = "Applied promo 20% off on the cheapest product buying more than one for the Tools products. ";
             }
             $this->totalAmmount += $order['items'][$key]['total'];
         }
@@ -75,6 +77,7 @@ class DiscountCalculator extends AbstractController
         // PROMO C
         if ($customer[0]['revenue'] > self::PROMO_C_AMMOUNT) {
             $order['total'] = $order['total'] - ($order['total'] * (self::PROMO_C_PERC / 100));
+            $order['message'] = "Applied promo 10% off over 1000€ in revenue. ";
         }
 
         return $order;

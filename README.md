@@ -33,10 +33,12 @@ Run the command bellow in order to test the API.
 $ php -S localhost:8000 -t public/
 ```
 
-I suggest to load some data for customers and products, where you can take from here:\
+I suggest to load some data for customers and products, where you can take from here:
 
-Customers - https://github.com/teamleadercrm/coding-test/blob/master/data/customers.json\
-Products - https://github.com/teamleadercrm/coding-test/blob/master/data/products.json\
+Customers - https://github.com/teamleadercrm/coding-test/blob/master/data/customers.json
+
+Products - https://github.com/teamleadercrm/coding-test/blob/master/data/products.json
+
 Orders - https://github.com/teamleadercrm/coding-test/tree/master/example-orders
 
 ### Customers

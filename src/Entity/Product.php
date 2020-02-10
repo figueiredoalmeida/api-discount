@@ -11,7 +11,6 @@ class Product
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
      * @ORM\Column(type="string", length=8)
      */
     private $id;

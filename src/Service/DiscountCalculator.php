@@ -18,7 +18,7 @@ class DiscountCalculator extends AbstractController
     const PROMO_A_ADD_QUANTITY = 1;
 
     /**
-     * PROMO C
+     * PROMO B
      * If you buy two or more products of category "Tools" (id 1),
      * you get a 20% discount on the cheapest product
     */
